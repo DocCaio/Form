@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { Box, Flex, Heading ,Text } from "@chakra-ui/react";
+import { Box, Flex, FormControl,FormLabel, Heading ,Input,Text } from "@chakra-ui/react";
 
 
 
@@ -25,10 +25,42 @@ export default function Home() {
           >
         <Box>
           <Heading>
-            <Text>
-              
-            </Text>
+            <Text>Registragion form</Text>
           </Heading>
+          <Box>
+            <form action='' autoComplete="off">
+            <FormControl>
+              <FormLabel>First name</FormLabel>
+              <Input type='email' />              
+           </FormControl>
+
+           <FormControl>
+              <FormLabel>Last name</FormLabel>
+              <Input type='email' />              
+           </FormControl>
+
+           <FormControl>
+              <FormLabel>Your e-mail</FormLabel>
+              <Input type='email' />              
+           </FormControl>
+
+           <FormControl>
+              <FormLabel>Your address</FormLabel>
+              <Input type='email' />              
+           </FormControl>
+
+           <FormControl>
+              <FormLabel>Your phone</FormLabel>
+              <Input type='email' />              
+           </FormControl>
+
+           <FormControl>
+              <FormLabel>Your descript message</FormLabel>
+              <Input type='email' />              
+           </FormControl>
+              
+            </form>
+          </Box>
         </Box>
        </Flex>
       </main>
