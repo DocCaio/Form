@@ -1,10 +1,18 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
+import { useState } from "react";
 
 
 
 export default function Home() {
+ const [fistName, setFirstName] = useState('');
+ const [lastName, setLastName] = useState('');
+ const [email, setEmail] = useState('');
+ const [address, setAddress] = useState('');
+ const [phone, setPhone] = useState('');
+ const [description, setDescription] = useState('');
+
   return (
     <>
       <Head>
@@ -45,13 +53,14 @@ export default function Home() {
               <FormLabel textColor='gray.200'>First name</FormLabel>
               <Input
                type='text'
-               name="name"
+               name="firstName"
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="First name"               
+               placeholder="First name" 
+               onChange={(e) => setFirstName(e.target.value)}              
                />              
            </FormControl>
 
@@ -59,13 +68,14 @@ export default function Home() {
               <FormLabel textColor='gray.200'>Last name</FormLabel>
               <Input
                type='text'
-               name="name"
+               name="lastName"
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Last name"               
+               placeholder="Last name"
+               onChange={(e) => setLastName(e.target.value)}                 
                />               
            </FormControl>
            </Flex>
@@ -74,13 +84,14 @@ export default function Home() {
               <FormLabel textColor='gray.200'>Your e-mail</FormLabel>
               <Input
                type='text'
-               name="name"
+               name="email<"
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Your e-mail"               
+               placeholder="Your e-mail"
+               onChange={(e) => setEmail(e.target.value)}                
                />              
            </FormControl>
 
@@ -89,13 +100,14 @@ export default function Home() {
               <FormLabel textColor='gray.200'>Your address</FormLabel>
               <Input
                type='text'
-               name="name"
+               name="address"
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Your address"               
+               placeholder="Your address"
+               onChange={(e) => setAddress(e.target.value)}                 
                />              
            </FormControl>
 
@@ -109,22 +121,24 @@ export default function Home() {
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Your phone"               
+               placeholder="Your phone"  
+               onChange={(e) => setPhone(e.target.value)}               
                />               
            </FormControl>
            </Flex>
 
            <FormControl isRequired marginTop='15px'>
-              <FormLabel textColor='gray.200'>Your descript message</FormLabel>
+              <FormLabel textColor='gray.200'>Your description message</FormLabel>
               <Textarea               
                name="name"
-               border='none'
+               border='description'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                resize='none'
-               placeholder="Your descript messag"              
+               placeholder="Your descript menssage"
+               onChange={(e) => setDescription(e.target.value)}                
                />               
            </FormControl>
               <Button
