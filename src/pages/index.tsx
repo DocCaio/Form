@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { Box, Flex, FormControl,FormLabel, Heading ,Input,Text } from "@chakra-ui/react";
+import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
 
 
 
@@ -16,48 +16,127 @@ export default function Home() {
       <main className={styles.main}>
        <Flex 
           minHeight='100vh'
-          width='100%'
+          width='full'
           align='center'
           justifyContent='center'
           backgroundColor='hsl(148, 38%, 91%)'
           position='relative'
           
           >
-        <Box>
+        <Box
+         px={12}
+         py={12}
+         width='full'
+         maxWidth='450px'
+         textAlign='center'
+         boxShadow='lg'
+         background='gray.700'
+         borderRadius='6px'
+        
+        >
           <Heading>
-            <Text>Registragion form</Text>
+            <Text textColor='gray.200' fontSize='2xl'>Registragion form</Text>
           </Heading>
           <Box>
             <form action='' autoComplete="off">
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input type='email' />              
+
+              <Flex justifyContent='space-between'>
+            <FormControl isRequired marginTop='15px' width='49%'>
+              <FormLabel textColor='gray.200'>First name</FormLabel>
+              <Input
+               type='text'
+               name="name"
+               border='none'
+               outline='none'
+               bgColor='gray.900'
+               focusBorderColor="gray.600"
+               color='gray.200'
+               placeholder="First name"               
+               />              
            </FormControl>
 
-           <FormControl>
-              <FormLabel>Last name</FormLabel>
-              <Input type='email' />              
+           <FormControl isRequired marginTop='15px' width='49%'>
+              <FormLabel textColor='gray.200'>Last name</FormLabel>
+              <Input
+               type='text'
+               name="name"
+               border='none'
+               outline='none'
+               bgColor='gray.900'
+               focusBorderColor="gray.600"
+               color='gray.200'
+               placeholder="Last name"               
+               />               
+           </FormControl>
+           </Flex>
+
+           <FormControl isRequired marginTop='15px'>
+              <FormLabel textColor='gray.200'>Your e-mail</FormLabel>
+              <Input
+               type='text'
+               name="name"
+               border='none'
+               outline='none'
+               bgColor='gray.900'
+               focusBorderColor="gray.600"
+               color='gray.200'
+               placeholder="Your e-mail"               
+               />              
            </FormControl>
 
-           <FormControl>
-              <FormLabel>Your e-mail</FormLabel>
-              <Input type='email' />              
+           <Flex justifyContent='space-between'>
+           <FormControl isRequired marginTop='15px' width='49%'>
+              <FormLabel textColor='gray.200'>Your address</FormLabel>
+              <Input
+               type='text'
+               name="name"
+               border='none'
+               outline='none'
+               bgColor='gray.900'
+               focusBorderColor="gray.600"
+               color='gray.200'
+               placeholder="Your address"               
+               />              
            </FormControl>
 
-           <FormControl>
-              <FormLabel>Your address</FormLabel>
-              <Input type='email' />              
+           <FormControl isRequired marginTop='15px' width='49%'>
+              <FormLabel textColor='gray.200'>Your phone</FormLabel>
+              <Input
+               type='text'
+               name="name"
+               border='none'
+               outline='none'
+               bgColor='gray.900'
+               focusBorderColor="gray.600"
+               color='gray.200'
+               placeholder="Your phone"               
+               />               
            </FormControl>
+           </Flex>
 
-           <FormControl>
-              <FormLabel>Your phone</FormLabel>
-              <Input type='email' />              
+           <FormControl isRequired marginTop='15px'>
+              <FormLabel textColor='gray.200'>Your descript message</FormLabel>
+              <Textarea               
+               name="name"
+               border='none'
+               outline='none'
+               bgColor='gray.900'
+               focusBorderColor="gray.600"
+               color='gray.200'
+               resize='none'
+               placeholder="Your descript messag"              
+               />               
            </FormControl>
-
-           <FormControl>
-              <FormLabel>Your descript message</FormLabel>
-              <Input type='email' />              
-           </FormControl>
+              <Button
+              type="submit"
+              width='full'
+              bgColor='green.400'
+              mt={4}
+              color='gray.200'
+              _hover={{
+                color:'black'
+              }}
+              >Register</Button>
               
             </form>
           </Box>
