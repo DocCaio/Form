@@ -3,6 +3,14 @@ import styles from "@/styles/Home.module.css";
 import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 
+interface IHomeProps {
+  fistName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  description: string;
+}
+
 
 
 export default function Home() {
@@ -12,6 +20,21 @@ export default function Home() {
  const [address, setAddress] = useState('');
  const [phone, setPhone] = useState('');
  const [description, setDescription] = useState('');
+
+ const handleSubmit = (e : FocusEvent) => {
+       e.preventDefault();
+
+       const data = {
+        fistName,
+        lastName,
+        email,
+        address,
+        phone,
+        description
+       }
+
+       console.log(data)
+ }
 
   return (
     <>
@@ -46,7 +69,7 @@ export default function Home() {
             <Text textColor='gray.200' fontSize='2xl'>Registragion form</Text>
           </Heading>
           <Box>
-            <form action='' autoComplete="off">
+            <form action='' autoComplete="off" onSubmit={handleSubmit}>
 
               <Flex justifyContent='space-between'>
             <FormControl isRequired marginTop='15px' width='49%'>
