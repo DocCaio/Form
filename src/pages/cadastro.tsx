@@ -3,6 +3,7 @@ import styles from "@/styles/Home.module.css";
 import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface IHomeProps {
   fistName: string;
