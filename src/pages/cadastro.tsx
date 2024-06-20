@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface IHomeProps {
   fistName: string;
@@ -9,32 +10,18 @@ interface IHomeProps {
   email: string;
   phone: string;
   description: string;
+  onSubmit : () => void;
+  handleSubmit: () => void;
 }
 
 
 
-const  Home: FunctionComponent<IHomeProps> = () => {
- const [fistName, setFirstName] = useState('');
- const [lastName, setLastName] = useState('');
- const [email, setEmail] = useState('');
- const [address, setAddress] = useState('');
- const [phone, setPhone] = useState('');
- const [description, setDescription] = useState('');
-
- const handleSubmit = (e : FocusEvent) => {
-       e.preventDefault();
-
-       const data = {
-        fistName,
-        lastName,
-        email,
-        address,
-        phone,
-        description
-       }
-
-       console.log(data)
- }
+const  Cadastro: FunctionComponent<IHomeProps> = () => {
+ 
+    const { register , handleSubmit} = useForm();
+    const OnSubmit = (data : Object) => {
+        console.log(data)
+    }
 
   return (
     <>
@@ -69,36 +56,34 @@ const  Home: FunctionComponent<IHomeProps> = () => {
             <Text textColor='gray.200' fontSize='2xl'>Registragion form</Text>
           </Heading>
           <Box>
-            <form action='' autoComplete="off" onSubmit={handleSubmit}>
+            <form action='' autoComplete="off" onSubmit={handleSubmit(OnSubmit)}>
 
               <Flex justifyContent='space-between'>
             <FormControl isRequired marginTop='15px' width='49%'>
               <FormLabel textColor='gray.200'>First name</FormLabel>
               <Input
-               type='text'
-               name="firstName"
+               type='text'               
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                placeholder="First name" 
-               onChange={(e) => setFirstName(e.target.value)}              
+               {...register('fistName')}           
                />              
            </FormControl>
 
            <FormControl isRequired marginTop='15px' width='49%'>
               <FormLabel textColor='gray.200'>Last name</FormLabel>
               <Input
-               type='text'
-               name="lastName"
+               type='text'               
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                placeholder="Last name"
-               onChange={(e) => setLastName(e.target.value)}                 
+               {...register('lastName')}            
                />               
            </FormControl>
            </Flex>
@@ -106,15 +91,14 @@ const  Home: FunctionComponent<IHomeProps> = () => {
            <FormControl isRequired marginTop='15px'>
               <FormLabel textColor='gray.200'>Your e-mail</FormLabel>
               <Input
-               type='text'
-               name="email<"
+               type='text'               
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                placeholder="Your e-mail"
-               onChange={(e) => setEmail(e.target.value)}                
+               {...register('email')}                
                />              
            </FormControl>
 
@@ -122,46 +106,43 @@ const  Home: FunctionComponent<IHomeProps> = () => {
            <FormControl isRequired marginTop='15px' width='49%'>
               <FormLabel textColor='gray.200'>Your address</FormLabel>
               <Input
-               type='text'
-               name="address"
+               type='text'               
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                placeholder="Your address"
-               onChange={(e) => setAddress(e.target.value)}                 
+               {...register('address')}               
                />              
            </FormControl>
 
            <FormControl isRequired marginTop='15px' width='49%'>
               <FormLabel textColor='gray.200'>Your phone</FormLabel>
               <Input
-               type='text'
-               name="name"
+               type='text'               
                border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                placeholder="Your phone"  
-               onChange={(e) => setPhone(e.target.value)}               
+               {...register('phone')}              
                />               
            </FormControl>
            </Flex>
 
            <FormControl isRequired marginTop='15px'>
               <FormLabel textColor='gray.200'>Your description message</FormLabel>
-              <Textarea               
-               name="name"
-               border='description'
+              <Textarea            
+               border='none'
                outline='none'
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
                resize='none'
                placeholder="Your descript menssage"
-               onChange={(e) => setDescription(e.target.value)}                
+               {...register('description')}              
                />               
            </FormControl>
               <Button
@@ -184,4 +165,4 @@ const  Home: FunctionComponent<IHomeProps> = () => {
   );
 }
 
-export default Home;
+export default Cadastro;
