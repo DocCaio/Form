@@ -4,26 +4,40 @@ import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea
 import { FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from 'yup';
 
-interface IHomeProps {
-  fistName: string;
+interface IUserFormData {
+  firstName: string;
   lastName: string;
   email: string;
+  address: string;
   phone: string;
   description: string;
-  onSubmit : () => void;
-  handleSubmit: () => void;
 }
 
+const schema = yup.object({
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  email: yup.string().required(),
+  address: yup.string().required(),
+  phone: yup.string().required(),
+  description: yup.string().required(),
+}) 
 
 
-const  Cadastro: FunctionComponent<IHomeProps> = () => {
+const  Cadastro: FunctionComponent = () => {
  
-    const { register , handleSubmit} = useForm();
-    const OnSubmit = (data : Object) => {
-        console.log(data)
+    const { register , handleSubmit, formState: {errors}} = useForm( {
+      resolver: yupResolver(schema)
+    });
+    function OnSubmit(data: IUserFormData) {
+       console.log(data)
     }
 
+    function setErros(error: any){
+      console.log('erros', error)
+    }
+    
   return (
     <>
       <Head>
@@ -57,7 +71,7 @@ const  Cadastro: FunctionComponent<IHomeProps> = () => {
             <Text textColor='gray.200' fontSize='2xl'>Registragion form</Text>
           </Heading>
           <Box>
-            <form action='' autoComplete="off" onSubmit={handleSubmit(OnSubmit)}>
+            <form action='' autoComplete="off" onSubmit={handleSubmit(OnSubmit , setErros)}>
 
               <Flex justifyContent='space-between'>
             <FormControl isRequired marginTop='15px' width='49%'>
@@ -70,7 +84,7 @@ const  Cadastro: FunctionComponent<IHomeProps> = () => {
                focusBorderColor="gray.600"
                color='gray.200'
                placeholder="First name" 
-               {...register('fistName')}           
+               {...register('firstName')}           
                />              
            </FormControl>
 
