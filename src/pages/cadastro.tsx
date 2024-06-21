@@ -186,15 +186,15 @@ const  Cadastro: FunctionComponent = () => {
                 color:'hsl(171, 83%, 14%)'
               }}
               >Register</Button>
-               <FormControl isRequired marginTop='15px' className="checkbox">
+              <fieldset className="checkbox">
             <div id="consent">
               <input   type="checkbox" name="consent" id="checkbox-input"/>
-              <label style={{color: '#fff'}}  className="consent">I consent to being contacted by the team</label>
+              <label style={{ color: '#fff'}}  className="consent">I consent to being contacted by the team</label>
             </div>
             <p style={{ display: 'none'}} className="error-message hide">
               To submit form, please consent to being contacted
             </p>
-          </FormControl>
+          </fieldset>
               
             </form>
           </Box>
