@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { Box, Button, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -188,12 +188,17 @@ const  Cadastro: FunctionComponent = () => {
               >Register</Button>
               <fieldset className="checkbox">
             <div id="consent">
-              <input   type="checkbox" name="consent" id="checkbox-input"/>
-              <label style={{ color: '#fff'}}  className="consent">I consent to being contacted by the team</label>
+            <Checkbox
+              isRequired
+              marginTop='15px'
+              color='#fff'
+              >I consent to being contacted by the team
+             </Checkbox>
+              {/*<label style={{ color: '#fff'}}  className="consent">I consent to being contacted by the team</label>*/}
             </div>
             <p style={{ display: 'none'}} className="error-message hide">
               To submit form, please consent to being contacted
-            </p>
+            </p>*
           </fieldset>
               
             </form>
