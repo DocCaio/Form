@@ -6,13 +6,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
 
+
 interface IUserFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  phone: string;
-  description: string;
+  firstName: string,
+  lastName: string,
+  email: string,
+  address: string,
+  phone: string,
+  description: string,
+  handleSubmit:() => void,
+  OnSubmit : () => void,
 }
 
 const schema = yup.object({
@@ -27,16 +30,18 @@ const schema = yup.object({
 
 const  Cadastro: FunctionComponent = () => {
  
-    const { register , handleSubmit, formState: {errors}} = useForm( {
+    const { register , 
+      handleSubmit, 
+      formState: {errors}} = useForm<IUserFormData>( {
       resolver: yupResolver(schema)
     });
     function OnSubmit(data: IUserFormData) {
        console.log(data)
     }
 
-    function setErros(error: any){
-      console.log('erros', error)
-    }
+    //function setErros(error: any){
+      //console.log('erros', error)
+    //}
     
   return (
     <>
@@ -71,7 +76,7 @@ const  Cadastro: FunctionComponent = () => {
             <Text textColor='gray.200' fontSize='2xl'>Registragion form</Text>
           </Heading>
           <Box>
-            <form action='' autoComplete="off" onSubmit={handleSubmit(OnSubmit , setErros)}>
+            <form action='' autoComplete="off" onSubmit={handleSubmit(OnSubmit)}>
 
               <Flex justifyContent='space-between'>
             <FormControl isRequired marginTop='15px' width='49%'>
@@ -85,7 +90,8 @@ const  Cadastro: FunctionComponent = () => {
                color='gray.200'
                placeholder="First name" 
                {...register('firstName')}           
-               />              
+               />    
+              <p style={{ color: 'red' }}>{errors?.firstName?.message}</p>      
            </FormControl>
 
            <FormControl isRequired marginTop='15px' width='49%'>
@@ -99,7 +105,8 @@ const  Cadastro: FunctionComponent = () => {
                color='gray.200'
                placeholder="Last name"
                {...register('lastName')}            
-               />               
+               />
+               <p style={{ color: 'red' }}>{errors?.lastName?.message}</p>               
            </FormControl>
            </Flex>
 
@@ -114,7 +121,8 @@ const  Cadastro: FunctionComponent = () => {
                color='gray.200'
                placeholder="Your e-mail"
                {...register('email')}                
-               />              
+               />      
+               <p style={{ color: 'red' }}>{errors?.email?.message}</p>        
            </FormControl>
 
            <Flex justifyContent='space-between'>
@@ -129,7 +137,8 @@ const  Cadastro: FunctionComponent = () => {
                color='gray.200'
                placeholder="Your address"
                {...register('address')}               
-               />              
+               />  
+               <p style={{ color: 'red' }}>{errors?.address?.message}</p>            
            </FormControl>
 
            <FormControl isRequired marginTop='15px' width='49%'>
@@ -143,7 +152,8 @@ const  Cadastro: FunctionComponent = () => {
                color='gray.200'
                placeholder="Your phone"  
                {...register('phone')}              
-               />               
+               /> 
+               <p style={{ color: 'red' }}>{errors?.phone?.message}</p>              
            </FormControl>
            </Flex>
 
@@ -158,18 +168,33 @@ const  Cadastro: FunctionComponent = () => {
                resize='none'
                placeholder="Your descript menssage"
                {...register('description')}              
-               />               
+               />   
+               <p style={{ color: 'red' }}>{errors?.description?.message}</p>            
            </FormControl>
               <Button
-              type="submit"
+              type="submit"              
               width='full'
-              bgColor='green.400'
-              mt={4}
-              color='gray.200'
+              bgColor='hsl(169, 82%, 27%)'
+              color= '#fff'              
+              fontWeight= 'bold'
+              border= '0'
+              mt={4}           
+              cursor= 'pointer'
+              borderRadius= '5px'
+              fontSize= 'clamp(0.875rem, 0.8315rem + 0.2174vi, 1rem)'         
               _hover={{
-                color:'black'
+                color:'hsl(171, 83%, 14%)'
               }}
               >Register</Button>
+              <fieldset className="checkbox">
+            <div id="consent">
+              <input   type="checkbox" name="consent" id="checkbox-input"/>
+              <label style={{ display: 'none'}}  className="consent">I consent to being contacted by the team</label>
+            </div>
+            <p style={{ display: 'none'}} className="error-message hide">
+              To submit form, please consent to being contacted
+            </p>
+          </fieldset>
               
             </form>
           </Box>
