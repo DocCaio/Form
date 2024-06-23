@@ -19,15 +19,14 @@
 ### Print
   <img src="#" alt="Minha Figura">
 
-  ### Email
-  
-  https://www.emailjs.com/
+  ### NPM  
+
 
   This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
   ```mk
-npm install react-slick --save
+npm install react-hook-form
 
-npm install slick-carousel --save
+npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 
-npm install react-bootstrap bootstrap  
+npm i yup
