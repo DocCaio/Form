@@ -39,6 +39,26 @@ const  Cadastro: FunctionComponent = () => {
        console.log(data)
     }
 
+    const  fethEndereco = async (zip: string) => {
+      if(!zip) {
+        setError('zip', {
+          type:'manual',
+          message:'ZiP Invalido',
+
+        })
+        return
+      }
+      try {
+        const response = await fetch(`http://viacep.com.br/ws/${zip}json/`)
+        const data = await response.json();
+
+        console.log(data)
+      } catch (error) {
+        console.error(error)
+      }
+    };
+    console.log(fethEndereco('01001000'))
+
     //function setErros(error: any){
       //console.log('erros', error)
     //}
@@ -88,7 +108,7 @@ const  Cadastro: FunctionComponent = () => {
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="First name" 
+               placeholder="Zip code" 
                {...register('firstName')}           
                />    
               <p style={{ color: 'red' }}>{errors?.firstName?.message}</p>      
@@ -105,7 +125,7 @@ const  Cadastro: FunctionComponent = () => {
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Your e-mail"
+               placeholder="Steet"
                {...register('email')}                
                />      
                <p style={{ color: 'red' }}>{errors?.email?.message}</p>        
@@ -121,7 +141,7 @@ const  Cadastro: FunctionComponent = () => {
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Your address"
+               placeholder="Number"
                {...register('address')}               
                />  
                <p style={{ color: 'red' }}>{errors?.address?.message}</p>            
@@ -136,7 +156,7 @@ const  Cadastro: FunctionComponent = () => {
                bgColor='gray.900'
                focusBorderColor="gray.600"
                color='gray.200'
-               placeholder="Your phone"  
+               placeholder="Neighborhood"  
                {...register('phone')}              
                /> 
                <p style={{ color: 'red' }}>{errors?.phone?.message}</p>              
@@ -152,7 +172,7 @@ const  Cadastro: FunctionComponent = () => {
                focusBorderColor="gray.600"
                color='gray.200'
                resize='none'
-               placeholder="Your descript menssage"
+               placeholder="Localization"
                {...register('description')}              
                />   
                <p style={{ color: 'red' }}>{errors?.description?.message}</p>            
