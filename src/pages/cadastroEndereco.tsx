@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Box, Button, Checkbox, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -31,7 +31,8 @@ const schema = yup.object({
 const  Cadastro: FunctionComponent = () => {
  
     const { register , 
-      handleSubmit, 
+      handleSubmit,
+      setValue, 
       formState: {errors}} = useForm<IUserFormData>( {
       resolver: yupResolver(schema)
     });
@@ -39,29 +40,26 @@ const  Cadastro: FunctionComponent = () => {
        console.log(data)
     }
 
-    const  fethEndereco = async (zip: string) => {
-      if(!zip) {
-        setError('zip', {
-          type:'manual',
-          message:'ZiP Invalido',
-
-        })
-        return
-      }
-      try {
-        const response = await fetch(`http://viacep.com.br/ws/${zip}json/`)
-        const data = await response.json();
-
-        console.log(data)
-      } catch (error) {
-        console.error(error)
-      }
-    };
-    console.log(fethEndereco('01001000'))
-
+    const  handleSetDados = useCallback((dados: EnderecoProps) => {
+      setValue("endereco.bairro", dados.bairro);
+      setValue("endereco.rua", dados.logradouro);
+      setValue("endereco.localidade", dados.localidade + ", " + dados.uf);
+    },[])
+const buscaEndereco  =  useCallback( async (cep : string) => {
+  const result = await fetch(`viacep.com.br/ws/${cep}/json/`)
+  const dados = await result.json();
+   handleSetDados(dados);
+}, [])
     //function setErros(error: any){
       //console.log('erros', error)
     //}
+
+    type EnderecoProps = {
+      logradouro: string;
+      bairro: string;
+      localidade: string;
+      uf: string;
+    };
     
   return (
     <>
