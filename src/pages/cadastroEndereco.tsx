@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Box, Button, Checkbox, Flex, FormControl,FormLabel, Heading ,Input,Text, Textarea } from "@chakra-ui/react";
-import { FunctionComponent, useCallback, useState } from "react";
+import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -32,7 +32,8 @@ const  Cadastro: FunctionComponent = () => {
  
     const { register , 
       handleSubmit,
-      setValue, 
+      setValue,
+      watch,
       formState: {errors}} = useForm<IUserFormData>( {
       resolver: yupResolver(schema)
     });
@@ -44,12 +45,17 @@ const  Cadastro: FunctionComponent = () => {
       setValue("endereco.bairro", dados.bairro);
       setValue("endereco.rua", dados.logradouro);
       setValue("endereco.localidade", dados.localidade + ", " + dados.uf);
-    },[])
+    },[setValue])
 const buscaEndereco  =  useCallback( async (cep : string) => {
   const result = await fetch(`viacep.com.br/ws/${cep}/json/`)
   const dados = await result.json();
    handleSetDados(dados);
-}, [])
+}, [handleSetDados])
+const codigoCep = watch('endereco.cep')
+ useEffect(() => {
+  if(codigoCep.length !===8) return;
+  buscaEndereco(codigoCep)
+ },[buscaEndereco, codigoCep])
     //function setErros(error: any){
       //console.log('erros', error)
     //}
