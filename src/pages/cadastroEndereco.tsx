@@ -18,6 +18,7 @@ interface IUserFormData {
   OnSubmit : () => void,
 }
 
+
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
@@ -39,32 +40,41 @@ const  Cadastro: FunctionComponent = () => {
     });
     function OnSubmit(data: IUserFormData) {
        console.log(data)
-    }
-
-    const  handleSetDados = useCallback((dados: EnderecoProps) => {
-      setValue("endereco.bairro", dados.bairro);
-      setValue("endereco.rua", dados.logradouro);
-      setValue("endereco.localidade", dados.localidade + ", " + dados.uf);
-    },[setValue])
-const buscaEndereco  =  useCallback( async (cep : string) => {
-  const result = await fetch(`viacep.com.br/ws/${cep}/json/`)
-  const dados = await result.json();
-   handleSetDados(dados);
-}, [handleSetDados])
-const codigoCep = watch('endereco.cep')
- useEffect(() => {
-  if(codigoCep.length !===8) return;
-  buscaEndereco(codigoCep)
- },[buscaEndereco, codigoCep])
-    //function setErros(error: any){
-      //console.log('erros', error)
-    //}
+    } 
 
     type EnderecoProps = {
       logradouro: string;
       bairro: string;
       localidade: string;
       uf: string;
+    };
+
+    const cepDigitado = watch("cep");
+
+    const fethEndereco = async (cep: string) => {
+      if (!cep) {
+        setError("cep", {
+          type: "manual",
+          message: "Cep inválido",
+        });
+  
+        return;
+      }
+  
+      try {
+        const response = await fetch(`http://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+  
+        if (response.ok) {
+          setValue("rua", data.logradouro);
+          setValue("localidade", `${data.localidade}, ${data.uf}`);
+          setValue("bairro", data.bairro);
+        } else {
+          throw new Error("Cep inválido");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
     
   return (
